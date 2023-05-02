@@ -1,3 +1,5 @@
+package ClassAssignment_10;
+
 import java.util.ArrayList;
 
 public class MyGenerics {
@@ -84,5 +86,53 @@ public class MyGenerics {
         return copy;
     }
 
+    public static < T extends Comparable <? super T> > T minElement (T[ ] arr) {
+        T min = arr[0];
+
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i].compareTo(min) < 0) {
+                min = arr[i];
+            }
+        }
+
+        return min;
+    }
+
+    public static < T extends Comparable <? super T> > ArrayList <T> minElements (T[ ] arr){
+        ArrayList<T> minArray = new ArrayList<>();
+        T min = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i].compareTo(min) == 0){
+                minArray.add(min);
+            }
+            if (arr[i].compareTo(min) < 0) {
+                min = arr[i];
+                if (!minArray.isEmpty())
+                {
+                    minArray.clear();
+                    minArray.add(min);
+                }
+            }
+        }
+        return minArray;
+    }
+
+    public static <T> ArrayList <T> intersect (ArrayList <T> A, ArrayList <T> B){
+        ArrayList <T> intersect = new ArrayList<>();
+        for (T x : A){
+            if (contains(B,x))
+                intersect.add(x);
+        }
+        return intersect;
+    }
+
+    public static <T> ArrayList <T> union (ArrayList <T> A, ArrayList <T> B) {
+        ArrayList <T> union = shallowCopy(A);
+        for (T x : B){
+            if (!contains(A,x))
+                union.add(x);
+        }
+        return union;
+    }
 
 }
